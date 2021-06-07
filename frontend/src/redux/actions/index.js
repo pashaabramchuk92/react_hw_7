@@ -1,5 +1,11 @@
 import { getData } from '../../utils/api';
-import { GET_POSTS, SET_PAGE } from './actionsType';
+import {
+  GET_POSTS,
+  SET_LIMIT,
+  SET_ORDER,
+  SET_QUERY,
+  SET_VIEW
+} from './actionsType';
 
 export const getPosts = (path, page, limit, order, query) => {
   return async (dispatch) => {
@@ -12,15 +18,22 @@ export const getPosts = (path, page, limit, order, query) => {
   }
 }
 
-export const setPage = (path, page) => {
-  return async (dispatch) => {
-    try {
-      const response = await getData.get(`${path}?_page=${page}`)
-      const x = response.config.url.slice(13);
-      console.log(x);
-      dispatch({ type: SET_PAGE, payload: x })
-    } catch(error) {
-      console.log(error);
-    }
-  }
-}
+export const setLimit = (limit) => ({
+  type: SET_LIMIT,
+  payload: limit,
+});
+
+export const setOrder = (order) => ({
+  type: SET_ORDER,
+  payload: order
+});
+
+export const setQuery = (query) => ({
+  type: SET_QUERY,
+  payload: query
+});
+
+export const setView = (view) => ({
+  type: SET_VIEW,
+  payload: view
+})

@@ -1,4 +1,4 @@
-import { GET_POSTS, SET_PAGE, SET_LIMIT, SET_ORDER, SET_QUERY } from "../actions/actionsType";
+import { GET_POSTS, SET_PAGE, SET_LIMIT, SET_ORDER, SET_QUERY, SET_VIEW } from "../actions/actionsType";
 
 
 const initialState = {
@@ -7,13 +7,13 @@ const initialState = {
   page: 1,
   limit: 6,
   order: 'asc',
-  query: ''
+  query: '',
+  view: 'grid'
 }
 
 const postsReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_POSTS:
-      console.log(payload);
       return {...state, posts: payload};
     case SET_PAGE:
       console.log(payload);
@@ -24,6 +24,8 @@ const postsReducer = (state = initialState, { type, payload }) => {
       return {...state, order: payload};
     case SET_QUERY:
       return {...state, query: payload};
+    case SET_VIEW:
+      return {...state, view: payload}
     default:
       return state;
   }

@@ -4,3 +4,4 @@ export const SET_PAGE = 'SET_PAGE';
 export const SET_LIMIT = 'SET_LIMIT';
 export const SET_ORDER = 'SET_ORDER';
 export const SET_QUERY = 'SET_QUERY';
+export const SET_VIEW = 'SET_VIEW';

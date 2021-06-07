@@ -1,19 +1,19 @@
-const ChangeView = () => {
+const ChangeView = ({ view, setView }) => {
 
-  // const activeClassGrid = viewGrid ? 'uk-active' : '';
-  // const activeClassList = viewList ? 'uk-active' : '';
-  
+  const activeClassGrid = view ? 'uk-active' : '';
+  const activeClassList = view ? '' : 'uk-active';
+
   return (
     <div className="uk-button-group uk-margin-left">
       <button
-        className={"uk-button uk-button-default"}
-        // onClick={() => {setViewGrid(true); setViewList(false)}}
+        className={"uk-button uk-button-default" + activeClassGrid}
+        onClick={() => setView('grid')}
       >
         <span uk-icon="icon:  grid"></span>
       </button>
       <button
-        className={"uk-button uk-button-default"}
-        // onClick={() => {setViewGrid(false); setViewList(true)}}
+        className={"uk-button uk-button-default" + activeClassList}
+        onClick={() => setView('')}
       >
         <span uk-icon="icon:  list"></span>
       </button>

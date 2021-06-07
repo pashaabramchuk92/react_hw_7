@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import useDebounce from '../hooks/useDebounce';
 
 import PostsGrid from "../components/posts/PostsGrid";
 import NavBar from '../components/navbar/NavBar';
 import { getPosts } from '../redux/actions';
 
-const Posts = ({ posts, getPosts }) => {
+const Posts = ({ posts, config, getPosts }) => {
+  const debouncedValue = useDebounce(config.query, 500);
 
-  const [path, ] = useState('/posts');
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(6);
-  const [order, setOrder] = useState('asc');
-  const [query, setQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
-    getPosts(path, page, limit, order, query);
-  }, [getPosts, path, page, limit, order, query]);
+    getPosts(config.path, config.page, config.limit, config.order, debouncedValue);
+    setIsSearching(false);
+  }, [getPosts, config.path, config.page, config.limit, config.order, debouncedValue]);
+
 
   return (
     <div className="uk-main">
       {/* <HeaderContainer /> */}
       <div className="uk-section">
         <div className="uk-container">
-          <NavBar />
+          <NavBar isSearching={isSearching} setIsSearching={setIsSearching}/>
           <PostsGrid posts={posts}/>
 
         </div>
@@ -33,14 +33,15 @@ const Posts = ({ posts, getPosts }) => {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.postsReducer.posts
+    posts: state.postsReducer.posts,
+    config: {
+      path: state.postsReducer.path,
+      page: state.postsReducer.page,
+      limit: state.postsReducer.limit,
+      order: state.postsReducer.order,
+      query: state.postsReducer.query,
+    },
   }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     getPosts,
-//   }
-// }
 
 export default connect(mapStateToProps, { getPosts })(Posts);
