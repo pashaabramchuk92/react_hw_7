@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import useDebounce from '../hooks/useDebounce';
 
-import PostsGrid from "../components/posts/PostsGrid";
-import NavBar from '../components/navbar/NavBar';
 import { getPosts } from '../redux/actions';
+import PostsGrid from "../components/posts/PostsGrid";
+import PostsList from "../components/posts/PostsList";
+import NavBar from '../components/navbar/NavBar';
+import Footer from '../components/footer/Footer';
 
 const Posts = ({ posts, config, getPosts }) => {
   const debouncedValue = useDebounce(config.query, 500);
@@ -16,16 +18,14 @@ const Posts = ({ posts, config, getPosts }) => {
     setIsSearching(false);
   }, [getPosts, config.path, config.page, config.limit, config.order, debouncedValue]);
 
-
   return (
-    <div className="uk-main">
-      {/* <HeaderContainer /> */}
-      <div className="uk-section">
-        <div className="uk-container">
-          <NavBar isSearching={isSearching} setIsSearching={setIsSearching}/>
-          <PostsGrid posts={posts}/>
-
-        </div>
+    <div className="uk-section">
+      <div className="uk-container">
+        <NavBar isSearching={isSearching} setIsSearching={setIsSearching}/>
+        {config.view === 'grid'
+        ? <PostsGrid posts={posts} />
+        : <PostsList posts={posts} />}
+        <Footer />
       </div>
     </div>
   )
@@ -40,6 +40,8 @@ const mapStateToProps = (state) => {
       limit: state.postsReducer.limit,
       order: state.postsReducer.order,
       query: state.postsReducer.query,
+      view: state.postsReducer.view,
+      total: state.postsReducer.total
     },
   }
 }

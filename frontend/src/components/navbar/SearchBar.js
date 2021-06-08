@@ -1,3 +1,5 @@
+import React from 'react';
+
 const SearchBar = ({ isSearching, setIsSearching, setQuery }) => {
   return (
     <form
@@ -22,4 +24,4 @@ const SearchBar = ({ isSearching, setIsSearching, setQuery }) => {
   )
 }
 
-export default SearchBar;
+export default React.memo(SearchBar);

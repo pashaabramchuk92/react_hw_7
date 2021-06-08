@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from "react-router-dom";
+
 const PostsGridItem = ({ post }) => {
   return (
     <div>
@@ -16,14 +19,14 @@ const PostsGridItem = ({ post }) => {
        {`${post.body.slice(0, 100).trim()}...`}
       </div>
       <div className="uk-card-footer">
-        {/* <Link
+        <Link
           to={`/posts/${post.id}`}
           className="uk-button uk-button-text"
-        >Read more</Link> */}
+        >Read more</Link>
       </div>
     </div>
   </div>
   )
 }
 
-export default PostsGridItem;
+export default React.memo(PostsGridItem);

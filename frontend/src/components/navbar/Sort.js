@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Sort = ({ setOrder }) => {
   return (
     <select
@@ -10,4 +12,4 @@ const Sort = ({ setOrder }) => {
   )
 }
 
-export default Sort;
+export default React.memo(Sort);

@@ -1,3 +1,5 @@
+import React from 'react';
+
 const ChangeView = ({ view, setView }) => {
 
   const activeClassGrid = view ? 'uk-active' : '';
@@ -21,4 +23,4 @@ const ChangeView = ({ view, setView }) => {
   )
 }
 
-export default ChangeView;
+export default React.memo(ChangeView);

@@ -1,3 +1,5 @@
+import React from 'react';
+
 const ShowOnPage = ({ setLimit }) => {
   return (
     <select
@@ -11,4 +13,4 @@ const ShowOnPage = ({ setLimit }) => {
   )
 }
 
-export default ShowOnPage;
+export default React.memo(ShowOnPage);
