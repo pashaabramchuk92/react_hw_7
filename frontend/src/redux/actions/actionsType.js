@@ -1,12 +1,18 @@
-export const GET_POSTS = 'GET_POSTS';
+export const GET_DATA = 'GET_DATA';
 export const SET_PATH = 'SET_PATH';
-export const SET_PAGE = 'SET_PAGE';
-export const SET_LIMIT = 'SET_LIMIT';
-export const SET_ORDER = 'SET_ORDER';
-export const SET_QUERY = 'SET_QUERY';
 export const SET_VIEW = 'SET_VIEW';
 export const SET_NEXT = 'SET_NEXT';
 export const GET_MORE_DATA = 'GET_MORE_DATA';
 export const GET_POST_DATA = 'GET_POST_DATA';
 export const GET_USER = 'GET_USER';
 export const POST_COMMENT = 'POST_COMMENT';
+
+export const SET_QUERY_POSTS = 'SET_QUERY_POSTS';
+export const SET_PAGE_POSTS = 'SET_PAGE_POSTS';
+export const SET_LIMIT_POSTS = 'SET_LIMIT_POSTS';
+export const SET_ORDER_POSTS = 'SET_ORDER_POSTS';
+
+export const SET_QUERY_ALBUMS = 'SET_QUERY_ALBUMS';
+export const SET_PAGE_ALBUMS = 'SET_PAGE_ALBUMS';
+export const SET_LIMIT_ALBUMS = 'SET_LIMIT_ALBUMS';
+export const SET_ORDER_ALBUMS = 'SET_ORDER_ALBUMS';

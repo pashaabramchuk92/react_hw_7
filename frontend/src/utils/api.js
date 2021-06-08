@@ -1,13 +1,8 @@
 import axios from "axios";
 
-const getData = axios.create({
+export default axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: {
         "Content-Type": "application/json"
     }
 });
-
-export {
-    getData,
-}
-

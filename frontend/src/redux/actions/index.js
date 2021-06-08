@@ -1,24 +1,29 @@
-import { getData } from '../../utils/api';
+import api from '../../utils/api';
 import {
-  GET_POSTS,
-  SET_LIMIT,
-  SET_ORDER,
-  SET_QUERY,
+  SET_LIMIT_POSTS,
+  SET_ORDER_POSTS,
+  SET_QUERY_POSTS,
+  SET_PAGE_POSTS,
+  SET_QUERY_ALBUMS,
+  SET_PAGE_ALBUMS,
+  SET_LIMIT_ALBUMS,
+  SET_ORDER_ALBUMS,
+  GET_DATA,
   SET_VIEW,
   SET_NEXT,
   GET_MORE_DATA,
-  SET_PAGE,
   GET_POST_DATA,
-  GET_USER
+  GET_USER,
+  POST_COMMENT
 } from './actionsType';
 
-export const getPosts = (path, page, limit, order, query) => {
+export const getData = (path, page, limit, order, query) => {
   return async (dispatch) => {
     try {
-      const response = await getData.get(`${path}?_page=${page}&_limit=${limit}&_sort=title&_order=${order}&title_like=${query}`)
+      const response = await api.get(`${path}?_page=${page}&_limit=${limit}&_sort=title&_order=${order}&title_like=${query}`)
 
       dispatch({
-        type: GET_POSTS,
+        type: GET_DATA,
         payload: {
           data: response.data,
           total: response.headers['x-total-count']
@@ -33,7 +38,7 @@ export const getPosts = (path, page, limit, order, query) => {
 export const getMoreData = (path, end, order) => {
   return async (dispatch) => {
     try {
-      const { data } = await getData.get(`${path}?_start=0&_end=${end}&_sort=title&_order=${order}`);
+      const { data } = await api.get(`${path}?_start=0&_end=${end}&_sort=title&_order=${order}`);
       dispatch({ type: GET_MORE_DATA, payload: data });
     } catch (error) {
       console.log(`Something went wrong... ${error}`);
@@ -44,7 +49,7 @@ export const getMoreData = (path, end, order) => {
 export const getPostData = (path, id) => {
   return async (dispatch) => {
     try {
-      const { data } = await getData.get(`${path}/${id}?_embed=comments`);
+      const { data } = await api.get(`${path}/${id}?_embed=comments`);
       dispatch({ type: GET_POST_DATA, payload: data });
     } catch (error) {
       console.log(`Something went wrong... ${error}`);
@@ -55,7 +60,7 @@ export const getPostData = (path, id) => {
 export const getUserData = (path, id) => {
   return async (dispatch) => {
     try {
-      const { data } = await getData.get(`${path}/${id}`);
+      const { data } = await api.get(`${path}/${id}`);
       dispatch({ type: GET_USER, payload: data });
     } catch (error) {
       console.log(`Something went wrong... ${error}`);
@@ -63,28 +68,18 @@ export const getUserData = (path, id) => {
   }
 };
 
-// export const postComment = (path, id, data) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await 
-//     }
-//   }
-// };
-
-export const setLimit = (limit) => ({
-  type: SET_LIMIT,
-  payload: limit,
-});
-
-export const setOrder = (order) => ({
-  type: SET_ORDER,
-  payload: order
-});
-
-export const setQuery = (query) => ({
-  type: SET_QUERY,
-  payload: query
-});
+export const postComment = (path, id, commentData) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await api.post(`${path}/${id}/comments`, {
+        ...commentData
+      });
+      dispatch({type: POST_COMMENT, payload: data});
+    } catch (error) {
+      console.log(`Something went wrong... ${error}`);
+    }
+  }
+};
 
 export const setView = (view) => ({
   type: SET_VIEW,
@@ -96,9 +91,50 @@ export const setNext = (next) => ({
   payload: next,
 });
 
-export const setPage = (page) => ({
-  type: SET_PAGE,
+
+export const setLimitPosts = (limit) => ({
+  type: SET_LIMIT_POSTS,
+  payload: limit,
+});
+
+export const setOrderPosts = (order) => ({
+  type: SET_ORDER_POSTS,
+  payload: order
+});
+
+export const setQueryPosts = (query) => ({
+  type: SET_QUERY_POSTS,
+  payload: query
+});
+
+export const setPagePosts = (page) => ({
+  type: SET_PAGE_POSTS,
   payload: page
 });
+
+
+
+
+export const setLimitAlbums = (limit) => ({
+  type: SET_LIMIT_ALBUMS,
+  payload: limit,
+});
+
+export const setOrderAlbums = (order) => ({
+  type: SET_ORDER_ALBUMS,
+  payload: order
+});
+
+export const setQueryAlbums = (query) => ({
+  type: SET_QUERY_ALBUMS,
+  payload: query
+});
+
+export const setPageAlbums = (page) => ({
+  type: SET_PAGE_ALBUMS,
+  payload: page
+});
+
+
 
 

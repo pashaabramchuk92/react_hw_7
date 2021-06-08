@@ -1,23 +1,23 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 
-const FormNewComment = ({ id, path }) => {
+import { postComment } from '../../redux/actions';
 
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [commentText, setCommentText] = useState('');
+const FormNewComment = ({ id, path, postComment }) => {
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [body, setBody] = useState('');
 
   const handlerSubmit = (e) => {
     e.preventDefault();
 
     const comment = {
-      id,
-      name: userName,
-      email: userEmail,
-      body: commentText
+      name,
+      email,
+      body
     }
-
-    
-
+    postComment(path, id, comment);
     e.target.reset();
   }
 
@@ -25,45 +25,45 @@ const FormNewComment = ({ id, path }) => {
     <form
       action="#"
       className="uk-comment-form uk-margin-medium-top"
-      // onSubmit={(e) => submitHandler(e)}
+      onSubmit={(e) => handlerSubmit(e)}
     >
       <fieldset className="uk-fieldset">
-          <legend className="uk-legend">Add Comment</legend>
-          <div className="uk-margin">
-            <input
-              className="uk-input"
-              type="text"
-              placeholder="Name"
-              required
-              onInput={e => setUserName(e.target.value)}
-            />
-          </div>
-          <div className="uk-margin">
-            <input
-              className="uk-input"
-              type="email"
-              placeholder="Email"
-              required
-              onInput={e => setUserEmail(e.target.value)}
-            />
-          </div>
-          <div className="uk-margin">
-            <textarea
-              className="uk-textarea"
-              rows="5"
-              placeholder="Comment"
-              required
-              onInput={e => setCommentText(e.target.value)}
-            ></textarea>
-          </div>
-          <div className="uk-margin">
-            <button className="uk-button uk-button-primary" type="submit">
-              Post Comment
-            </button>
-          </div>
+        <legend className="uk-legend">Add Comment</legend>
+        <div className="uk-margin">
+          <input
+            className="uk-input"
+            type="text"
+            placeholder="Name"
+            required
+            onInput={e => setName(e.target.value)}
+          />
+        </div>
+        <div className="uk-margin">
+          <input
+            className="uk-input"
+            type="email"
+            placeholder="Email"
+            required
+            onInput={e => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="uk-margin">
+          <textarea
+            className="uk-textarea"
+            rows="5"
+            placeholder="Comment"
+            required
+            onInput={e => setBody(e.target.value)}
+          ></textarea>
+        </div>
+        <div className="uk-margin">
+          <button className="uk-button uk-button-primary" type="submit">
+            Post Comment
+          </button>
+        </div>
       </fieldset>
     </form>
   )
 }
 
-export default FormNewComment;
+export default connect(null, { postComment })(FormNewComment);

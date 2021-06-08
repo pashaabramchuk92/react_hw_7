@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setLimit, setOrder, setQuery, setView } from '../../redux/actions';
+import { setView } from '../../redux/actions';
 
 
 import SearchBar from './SearchBar';
@@ -10,19 +10,18 @@ import ChangeView from './ChangeView';
 const NavBar = ({
   isSearching,
   view,
+  pathAlbums,
   setIsSearching,
-  setLimit,
-  setOrder,
-  setQuery,
   setView
 }) => {
-  
   return (
     <div className="uk-margin-medium-bottom uk-flex">
-      <SearchBar isSearching={isSearching} setIsSearching={setIsSearching} setQuery={setQuery} />
-      <Sort setOrder={setOrder} />
-      <ShowOnPage setLimit={setLimit} />
-      <ChangeView view={view} setView={setView} />
+      <SearchBar isSearching={isSearching} setIsSearching={setIsSearching} />
+      <Sort />
+      <ShowOnPage />
+      {window.location.pathname === pathAlbums
+      ? null
+      : <ChangeView view={view} setView={setView} />}
     </div>
   )
 }
@@ -30,7 +29,8 @@ const NavBar = ({
 const mapStateToProps = (state) => {
   return {
       view: state.postsReducer.view,
+      pathAlbums: state.albumsReducer.path,
     }
 }
 
-export default connect(mapStateToProps, { setLimit, setOrder, setQuery, setView })(NavBar);
+export default connect(mapStateToProps, { setView })(NavBar);

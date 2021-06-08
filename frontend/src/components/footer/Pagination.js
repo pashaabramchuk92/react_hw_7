@@ -1,11 +1,35 @@
 import { connect } from "react-redux";
-import { setPage } from '../../redux/actions';
+import { setPagePosts, setPageAlbums } from '../../redux/actions';
 
-const Pagination = ({ page, total, limit, setPage }) => {
+const Pagination = ({ pathAlbums, page, total, limit, setPagePosts, setPageAlbums }) => {
 
   const pageArr = [];
   for (let i = 1; i <= Math.ceil(total/limit); i++) {
     pageArr.push(i);
+  }
+
+  const handleClickNext = (e) => {
+    e.preventDefault();
+
+    window.location.pathname === pathAlbums
+    ? setPageAlbums(page + 1)
+    : setPagePosts(page + 1)
+  }
+
+  const handleClickPrev = (e) => {
+    e.preventDefault();
+
+    window.location.pathname === pathAlbums
+    ? setPageAlbums(page - 1)
+    : setPagePosts(page - 1)
+  }
+
+  const handleClickCurrent = (e) => {
+    e.preventDefault();
+
+    window.location.pathname === pathAlbums
+    ? setPageAlbums(e.target.getAttribute('value'))
+    : setPagePosts(e.target.getAttribute('value'))
   }
 
   return (
@@ -13,10 +37,11 @@ const Pagination = ({ page, total, limit, setPage }) => {
       <li>
         {page > 1 && <a
           href="/"
-          onClick={(e) => {
-            e.preventDefault();
-            setPage(page - 1)
-          }}
+          onClick={(e) => handleClickPrev(e)}
+          // onClick={(e) => {
+          //   e.preventDefault();
+          //   setPage(page - 1)
+          // }}
         ><span className="uk-icon uk-pagination-previous" uk-pagination-previous="true">
         </span></a>}
       </li>
@@ -30,10 +55,11 @@ const Pagination = ({ page, total, limit, setPage }) => {
             <a
               href="/"
               value={x}
-              onClick={(e) => {
-                e.preventDefault();
-                setPage(e.target.getAttribute('value'));
-              }}
+              onClick={(e) => handleClickCurrent(e)}
+              // onClick={(e) => {
+              //   e.preventDefault();
+              //   setPage(e.target.getAttribute('value'));
+              // }}
             >{x}</a>
           </li>
         )
@@ -41,10 +67,11 @@ const Pagination = ({ page, total, limit, setPage }) => {
       <li>
         {page < pageArr.length && <a
           href="/"
-          onClick={(e) => {
-            e.preventDefault();
-            setPage(page + 1)
-          }}
+          onClick={(e) => handleClickNext(e)}
+          // onClick={(e) => {
+          //   e.preventDefault();
+          //   setPage(page + 1)
+          // }}
         ><span className="uk-icon uk-pagination-next" uk-pagination-next="true">
           </span></a>}
       </li>
@@ -54,10 +81,11 @@ const Pagination = ({ page, total, limit, setPage }) => {
 
 const mapStateToProps = (state) => {
   return {
+    pathAlbums: state.albumsReducer.path,
     total: state.postsReducer.total,
     limit: state.postsReducer.limit,
     page: state.postsReducer.page
   }
 }
 
-export default connect(mapStateToProps, { setPage })(Pagination);
+export default connect(mapStateToProps, { setPagePosts, setPageAlbums })(Pagination);

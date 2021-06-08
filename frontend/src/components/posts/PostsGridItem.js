@@ -6,8 +6,8 @@ const PostsGridItem = ({ post }) => {
     <div>
     <div className="uk-card uk-card-default uk-margin-medium-bottom">
       <div className="uk-card-header">
-        <h3 className="uk-card-title uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
-          {`${post.title.slice(0, 10).trim()}...`}
+        <h3 className="uk-card-title uk-text-truncate uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
+          {`${post.title}`}
           {/* <LikeBtn
             id={post.id}
             isLiked={likedPosts.find(x => x.id === post.id)}
@@ -15,8 +15,8 @@ const PostsGridItem = ({ post }) => {
           /> */}
         </h3>
       </div>
-      <div className="uk-card-body">
-       {`${post.body.slice(0, 100).trim()}...`}
+      <div className="uk-card-body uk-text-break">
+       {`${post.body}`}
       </div>
       <div className="uk-card-footer">
         <Link

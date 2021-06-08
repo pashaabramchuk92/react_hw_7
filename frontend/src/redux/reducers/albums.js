@@ -1,48 +1,43 @@
 import {
   GET_DATA,
-  SET_VIEW,
   SET_NEXT,
   GET_MORE_DATA,
-  SET_LIMIT_POSTS,
-  SET_ORDER_POSTS,
-  SET_QUERY_POSTS,
-  SET_PAGE_POSTS,
+  SET_QUERY_ALBUMS,
+  SET_PAGE_ALBUMS,
+  SET_LIMIT_ALBUMS,
+  SET_ORDER_ALBUMS,
 } from "../actions/actionsType";
 
-
 const initialState = {
-  posts: [],
-  path: '/posts',
+  albums: [],
+  path: '/albums',
   page: 1,
   limit: 6,
   order: 'asc',
   query: '',
-  view: 'grid',
   next: 6,
   total: null
 }
-// 
-const postsReducer = (state = initialState, { type, payload }) => {
+
+const albumsReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_DATA:
-      return {...state, posts: payload.data, total: payload.total};
-    case SET_PAGE_POSTS:
+      return {...state, albums: payload.data, total: payload.total};
+    case SET_PAGE_ALBUMS:
       return {...state, page: payload};
-    case SET_LIMIT_POSTS:
+    case SET_LIMIT_ALBUMS:
       return {...state, limit: payload};
-    case SET_ORDER_POSTS:
+    case SET_ORDER_ALBUMS:
       return {...state, order: payload};
-    case SET_QUERY_POSTS:
+    case SET_QUERY_ALBUMS:
       return {...state, query: payload};
-    case SET_VIEW:
-      return {...state, view: payload}
     case SET_NEXT:
       return {...state, next: payload}
     case GET_MORE_DATA:
-      return {...state, posts: payload}
+      return {...state, albums: payload}
     default:
       return state;
   }
 }
 
-export default postsReducer;
+export default albumsReducer;

@@ -1,33 +1,40 @@
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 
-import Header from "../components/header/Header";
 import Posts from "./Posts";
 import PostPage from './PostPage';
+import Albums from "./Albums";
+import { connect } from "react-redux";
 
 const history = createBrowserHistory();
 
-const BlogApp = () => {
+const BlogApp = ({ postPath, albumsPath }) => {
   return (
     <Router history={history}>
       <Switch>
-        <div className="App">
-          <div className="uk-main">
-            <Header />
-            <Route
-              path='/'
-              exact
-              component={Posts}
-            />
-            <Route
-              path='/posts/:id'
-              component={PostPage}
-            />
-          </div>
-        </div>
+        <Route
+          path='/'
+          exact
+          component={Posts}
+        />
+        <Route
+          path={`${postPath}/:id`}
+          component={PostPage}
+        />
+        <Route
+          path={albumsPath}
+          component={Albums}
+        />
       </Switch>
     </Router>
   );
 }
 
-export default BlogApp;
+const mapStateToProps = (state) => {
+  return {
+    postPath: state.postsReducer.path,
+    albumsPath: state.albumsReducer.path,
+  }
+}
+
+export default connect(mapStateToProps)(BlogApp);

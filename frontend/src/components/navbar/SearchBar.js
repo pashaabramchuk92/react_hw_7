@@ -1,6 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setQueryPosts, setQueryAlbums } from '../../redux/actions';
 
-const SearchBar = ({ isSearching, setIsSearching, setQuery }) => {
+const SearchBar = ({
+  pathAlbums,
+  isSearching,
+  searchValuePosts,
+  searchValueAlbums,
+  setIsSearching,
+  setQueryPosts,
+  setQueryAlbums
+}) => {
+
+  const handleSearch = (e) => {
+    setIsSearching(true);
+
+    window.location.pathname === pathAlbums
+    ? setQueryAlbums(e.target.value)
+    : setQueryPosts(e.target.value)
+  }
+
   return (
     <form
       className="uk-search uk-search-default uk-width-medium uk-margin-remove uk-margin-right"
@@ -15,13 +34,23 @@ const SearchBar = ({ isSearching, setIsSearching, setQuery }) => {
         className="uk-search-input"
         type="search"
         placeholder="Search..."
-        onInput={(e) => {
-          setIsSearching(true);
-          setQuery(e.target.value)
-        }}
+        value={
+          window.location.pathname === pathAlbums
+          ? searchValueAlbums
+          : searchValuePosts
+        }
+        onInput={(e) => handleSearch(e)}
       />
     </form>
   )
 }
 
-export default React.memo(SearchBar);
+const mapStateToProps = (state) => {
+  return {
+      pathAlbums: state.albumsReducer.path,
+      searchValuePosts: state.postsReducer.query,
+      searchValueAlbums: state.albumsReducer.query,
+    }
+}
+
+export default connect(mapStateToProps, { setQueryPosts, setQueryAlbums })(React.memo(SearchBar));
