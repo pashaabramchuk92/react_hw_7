@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setLimitPosts, setLimitAlbums } from '../../redux/actions'; 
 
-const ShowOnPage = ({ pathAlbums, setLimitPosts, setLimitAlbums }) => {
+const ShowOnPage = ({ pathAlbums, limitPosts, limitAlbums, setLimitPosts, setLimitAlbums }) => {
 
   const handleChange = (e) => {
     window.location.pathname === pathAlbums
@@ -10,9 +10,12 @@ const ShowOnPage = ({ pathAlbums, setLimitPosts, setLimitAlbums }) => {
     : setLimitPosts(e.target.value)
   }
 
+  const selectedLimit = window.location.pathname === pathAlbums ? limitAlbums : limitPosts;
+
   return (
     <select
       className="uk-select uk-width-small uk-margin-left"
+      value={selectedLimit}
       onChange={(e) => handleChange(e)}
     >
       <option value="6">6</option>
@@ -25,6 +28,8 @@ const ShowOnPage = ({ pathAlbums, setLimitPosts, setLimitAlbums }) => {
 const mapStateToProps = (state) => {
   return {
       pathAlbums: state.albumsReducer.path,
+      limitPosts: state.postsReducer.limit,
+      limitAlbums: state.albumsReducer.limit
     }
 }
 

@@ -14,11 +14,11 @@ const PostListItem = ({ post }) => {
         </div>
         <div className="">
           <div className="uk-card-body">
-              <h3 className="uk-card-title uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
-              {`${post.title.slice(0, 10).trim()}...`}
+              <h3 className="uk-card-title uk-text-truncate uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
+              {post.title}
               </h3>
-            <p>
-            {`${post.body.slice(0, 100).trim()}...`}
+            <p className="uk-text-truncate">
+            {post.body}
             </p>
             <Link
               to={`/posts/${post.id}`}

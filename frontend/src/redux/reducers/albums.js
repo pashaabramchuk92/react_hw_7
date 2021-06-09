@@ -1,6 +1,6 @@
 import {
   GET_DATA,
-  SET_NEXT,
+  SET_NEXT_ALBUMS,
   GET_MORE_DATA,
   SET_QUERY_ALBUMS,
   SET_PAGE_ALBUMS,
@@ -31,7 +31,7 @@ const albumsReducer = (state = initialState, { type, payload }) => {
       return {...state, order: payload};
     case SET_QUERY_ALBUMS:
       return {...state, query: payload};
-    case SET_NEXT:
+    case SET_NEXT_ALBUMS:
       return {...state, next: payload}
     case GET_MORE_DATA:
       return {...state, albums: payload}

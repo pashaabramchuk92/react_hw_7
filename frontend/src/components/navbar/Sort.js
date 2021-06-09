@@ -10,12 +10,10 @@ const Sort = ({ pathAlbums, orderPosts, orderAlbums, setOrderPosts, setOrderAlbu
     : setOrderPosts(e.target.value)
   }
 
-  const selectedOrder = window.location.pathname === pathAlbums ? orderAlbums : orderPosts
-
-  const statusOptions = [
-    {value: 'asc', id: 0, selected: true},
-    {value: 'desc', id: 1, selected: false}
-  ];
+  const selectedOrder = 
+    window.location.pathname === pathAlbums
+    ? orderAlbums
+    : orderPosts;
 
   return (
     <select
@@ -24,15 +22,8 @@ const Sort = ({ pathAlbums, orderPosts, orderAlbums, setOrderPosts, setOrderAlbu
       value={selectedOrder}
       onChange={(e) => handleChange(e)}
     >
-      {statusOptions.map(option => (
-        <option
-          key={option.id}
-          value={option.value}
-          selected={option.selected}
-        >{option.value.toLocaleUpperCase()}</option>
-      ))}
-      {/* <option value="asc" selected={selectedOrder}>ASC</option>
-      <option value="desc" selected={selectedOrder}>DESC</option> */}
+      <option value="asc">ASC</option>
+      <option value='desc'>DESC</option>
     </select>
   )
 }

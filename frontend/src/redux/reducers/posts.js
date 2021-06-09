@@ -1,7 +1,7 @@
 import {
   GET_DATA,
   SET_VIEW,
-  SET_NEXT,
+  SET_NEXT_POSTS,
   GET_MORE_DATA,
   SET_LIMIT_POSTS,
   SET_ORDER_POSTS,
@@ -21,7 +21,7 @@ const initialState = {
   next: 6,
   total: null
 }
-// 
+
 const postsReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_DATA:
@@ -36,7 +36,7 @@ const postsReducer = (state = initialState, { type, payload }) => {
       return {...state, query: payload};
     case SET_VIEW:
       return {...state, view: payload}
-    case SET_NEXT:
+    case SET_NEXT_POSTS:
       return {...state, next: payload}
     case GET_MORE_DATA:
       return {...state, posts: payload}

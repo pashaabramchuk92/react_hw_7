@@ -8,9 +8,12 @@ import {
   SET_PAGE_ALBUMS,
   SET_LIMIT_ALBUMS,
   SET_ORDER_ALBUMS,
+
+  SET_NEXT_POSTS,
+  SET_NEXT_ALBUMS,
+
   GET_DATA,
   SET_VIEW,
-  SET_NEXT,
   GET_MORE_DATA,
   GET_POST_DATA,
   GET_USER,
@@ -20,13 +23,12 @@ import {
 export const getData = (path, page, limit, order, query) => {
   return async (dispatch) => {
     try {
-      const response = await api.get(`${path}?_page=${page}&_limit=${limit}&_sort=title&_order=${order}&title_like=${query}`)
-
+      const { data, headers } = await api.get(`${path}?_page=${page}&_limit=${limit}&_sort=title&_order=${order}&title_like=${query}`);
       dispatch({
         type: GET_DATA,
         payload: {
-          data: response.data,
-          total: response.headers['x-total-count']
+          data: data,
+          total: headers['x-total-count']
         }
       });
     } catch(error) {
@@ -86,10 +88,21 @@ export const setView = (view) => ({
   payload: view
 });
 
-export const setNext = (next) => ({
-  type: SET_NEXT,
+
+
+
+export const setNextPosts = (next) => ({
+  type: SET_NEXT_POSTS,
   payload: next,
 });
+
+export const setNextAlbums = (next) => ({
+  type: SET_NEXT_ALBUMS,
+  payload: next,
+});
+
+
+
 
 
 export const setLimitPosts = (limit) => ({
@@ -111,9 +124,6 @@ export const setPagePosts = (page) => ({
   type: SET_PAGE_POSTS,
   payload: page
 });
-
-
-
 
 export const setLimitAlbums = (limit) => ({
   type: SET_LIMIT_ALBUMS,

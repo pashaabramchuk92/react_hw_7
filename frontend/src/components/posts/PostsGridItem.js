@@ -15,7 +15,7 @@ const PostsGridItem = ({ post }) => {
           /> */}
         </h3>
       </div>
-      <div className="uk-card-body uk-text-break">
+      <div className="uk-card-body uk-text-truncate uk-text-break">
        {`${post.body}`}
       </div>
       <div className="uk-card-footer">
