@@ -6,6 +6,8 @@ import {
   SET_PAGE_ALBUMS,
   SET_LIMIT_ALBUMS,
   SET_ORDER_ALBUMS,
+  GET_LIKE_DATA,
+  SET_LIKE_ALBUM,
 } from "../actions/actionsType";
 
 const initialState = {
@@ -16,7 +18,9 @@ const initialState = {
   order: 'asc',
   query: '',
   next: 6,
-  total: null
+  total: null,
+  likedAlbums: [],
+  // like: false
 }
 
 const albumsReducer = (state = initialState, { type, payload }) => {
@@ -35,6 +39,10 @@ const albumsReducer = (state = initialState, { type, payload }) => {
       return {...state, next: payload}
     case GET_MORE_DATA:
       return {...state, albums: payload}
+    case GET_LIKE_DATA:
+      return {...state, likedAlbums: payload}
+    // case SET_LIKE_ALBUM:
+    //   return {...state, like: payload}
     default:
       return state;
   }

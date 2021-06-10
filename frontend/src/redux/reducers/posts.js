@@ -7,8 +7,9 @@ import {
   SET_ORDER_POSTS,
   SET_QUERY_POSTS,
   SET_PAGE_POSTS,
+  GET_LIKE_DATA,
+  SET_LIKE_POST,
 } from "../actions/actionsType";
-
 
 const initialState = {
   posts: [],
@@ -19,7 +20,9 @@ const initialState = {
   query: '',
   view: 'grid',
   next: 6,
-  total: null
+  total: null,
+  likedPosts: [],
+  // like: false
 }
 
 const postsReducer = (state = initialState, { type, payload }) => {
@@ -40,6 +43,10 @@ const postsReducer = (state = initialState, { type, payload }) => {
       return {...state, next: payload}
     case GET_MORE_DATA:
       return {...state, posts: payload}
+    case GET_LIKE_DATA:
+      return {...state, likedPosts: payload}
+    // case SET_LIKE_POST:
+    //   return {...state, like: payload}
     default:
       return state;
   }

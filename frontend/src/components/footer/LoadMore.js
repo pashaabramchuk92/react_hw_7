@@ -14,8 +14,8 @@ const LoadMore = ({ setNextPosts, setNextAlbums, getMoreData, config }) => {
     : getMoreData(config.pathPosts, config.nextPosts, config.orderPosts)
 
     setIsLoading(false)
-  }, [checkLocation, getMoreData, config.pathAlbums, config.nextAlbums, config.orderAlbums, 
-    config.pathPosts, config.nextPosts, config.orderPosts]);
+  }, [checkLocation, getMoreData, config.pathAlbums, config.nextAlbums,
+    config.orderAlbums, config.pathPosts, config.nextPosts, config.orderPosts]);
 
   const handleClick = () => (
     checkLocation

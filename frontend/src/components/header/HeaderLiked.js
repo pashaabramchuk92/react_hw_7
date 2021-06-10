@@ -1,4 +1,11 @@
-const HeaderLiked = () => {
+import React from 'react';
+import { connect } from "react-redux";
+// import { getLikeData, setLikePost, setLikeAlbum } from '../../redux/actions';
+
+const HeaderLiked = ({
+  pathPosts,
+  pathAlbums
+}) => {
   return (
     <table className="uk-table uk-table-divider uk-table-justify">
       <thead>
@@ -8,58 +15,19 @@ const HeaderLiked = () => {
         </tr>
       </thead>
       <tbody>
-        {/* {likedPosts.length > 0 && 
-        <tr style={{border: 'none'}}>
-          <th style={{color: '#333', fontWeight: '600'}}>Posts</th>
-        </tr>} */}
-        {/* {likedPosts?.map(post => (
-          <tr key={post.id}>
-            <td>
-              {
-                post.title.length > 45
-                ? `${post.title.slice(0, 45).trim()}...`
-                : post.title
-              }
-            </td>
-            <td className="uk-text-right">
-              <button
-                className="uk-button uk-icon"
-                type="button"
-                uk-icon="icon: close;"
-                onClick={() => setLikePost(pathPosts, post.id, false)}
-              >
-              </button>
-            </td>
-          </tr>
-        ))} */}
-{/* 
-        {likedAlbums.length > 0 &&
-        <tr style={{border: 'none'}}>
-          <th style={{color: '#333', fontWeight: '600'}}>Albums</th>
-        </tr>} */}
-        {/* {likedAlbums?.map(album => (
-          <tr key={album.id}>
-            <td>
-              {
-                album.title.length > 45
-                ? `${album.title.slice(0, 45).trim()}...`
-                : album.title
-              }
-            </td>
-            <td className="uk-text-right">
-              <button
-                className="uk-button uk-icon"
-                type="button"
-                uk-icon="icon: close;"
-                onClick={() => setLikeAlbum(pathAlbums, album.id, false)}
-              >
-              </button>
-            </td>
-          </tr>
-        ))} */}
+
       </tbody>
     </table>
   )
 }
 
-export default HeaderLiked;
+const mapStateToProps = (state) => {
+  return {
+    pathAlbums: state.albumsReducer.path,
+    pathPosts: state.postsReducer.path,
+  }
+}
+
+export default React.memo(
+  connect(mapStateToProps)(HeaderLiked)
+);

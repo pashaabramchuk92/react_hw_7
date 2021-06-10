@@ -17,13 +17,16 @@ import {
   GET_MORE_DATA,
   GET_POST_DATA,
   GET_USER,
-  POST_COMMENT
+  POST_COMMENT,
+  GET_LIKE_DATA,
+  SET_LIKE_POST,
+  SET_LIKE_ALBUM
 } from './actionsType';
 
 export const getData = (path, page, limit, order, query) => {
   return async (dispatch) => {
     try {
-      const { data, headers } = await api.get(`${path}?_page=${page}&_limit=${limit}&_sort=title&_order=${order}&title_like=${query}`);
+      const { data, headers } = await api.get(`${path}?_page=${page}&_limit=${limit}&_sort=id&_order=${order}&title_like=${query}`);
       dispatch({
         type: GET_DATA,
         payload: {
@@ -40,7 +43,7 @@ export const getData = (path, page, limit, order, query) => {
 export const getMoreData = (path, end, order) => {
   return async (dispatch) => {
     try {
-      const { data } = await api.get(`${path}?_start=0&_end=${end}&_sort=title&_order=${order}`);
+      const { data } = await api.get(`${path}?_start=0&_end=${end}&_sort=id&_order=${order}`);
       dispatch({ type: GET_MORE_DATA, payload: data });
     } catch (error) {
       console.log(`Something went wrong... ${error}`);
@@ -83,13 +86,47 @@ export const postComment = (path, id, commentData) => {
   }
 };
 
+export const getLikeData = (path) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await api.get(`${path}?like_like=true`);
+      dispatch({type: GET_LIKE_DATA, payload: data})
+    } catch (error) {
+      console.log(`Something went wrong... ${error}`);
+    }
+  }
+}
+
+export const setLikePost = (path, id, like) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await api.patch(`${path}/${id}`, {
+        like
+      });
+      dispatch({type: SET_LIKE_POST, payload: data.like})
+    } catch (error) {
+      console.log(`Something went wrong... ${error}`);
+    }
+  }
+}
+
+export const setLikeAlbum = (path, id, like) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await api.patch(`${path}/${id}`, {
+        like
+      });
+      dispatch({type: SET_LIKE_ALBUM, payload: data.like})
+    } catch (error) {
+      console.log(`Something went wrong... ${error}`);
+    }
+  }
+}
+
 export const setView = (view) => ({
   type: SET_VIEW,
   payload: view
 });
-
-
-
 
 export const setNextPosts = (next) => ({
   type: SET_NEXT_POSTS,
@@ -100,10 +137,6 @@ export const setNextAlbums = (next) => ({
   type: SET_NEXT_ALBUMS,
   payload: next,
 });
-
-
-
-
 
 export const setLimitPosts = (limit) => ({
   type: SET_LIMIT_POSTS,

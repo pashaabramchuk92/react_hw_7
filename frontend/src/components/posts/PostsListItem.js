@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LikeBtn from "../generic/LikeBtn";
 
 const PostListItem = ({ post }) => {
   return (
@@ -14,8 +15,9 @@ const PostListItem = ({ post }) => {
         </div>
         <div className="">
           <div className="uk-card-body">
-              <h3 className="uk-card-title uk-text-truncate uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
-              {post.title}
+              <h3 className="uk-card-title uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
+              {`${post.title.slice(0, 10)}...`}
+              <LikeBtn postId={post.id} />
               </h3>
             <p className="uk-text-truncate">
             {post.body}

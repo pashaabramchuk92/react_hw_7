@@ -1,4 +1,5 @@
 import React from 'react';
+import LikeBtn from '../generic/LikeBtn';
 
 const AlbumsGridItem = ({ album }) => {
 
@@ -17,6 +18,7 @@ const AlbumsGridItem = ({ album }) => {
             <p>{album.title}</p>
         </div>
         <div className="uk-position-top-right uk-overlay">
+          <LikeBtn albumId={album.id} />
           {/* <LikeBtn
             id={album.id}
             isLiked={likedAlbums.find(x => x.id === album.id)}
