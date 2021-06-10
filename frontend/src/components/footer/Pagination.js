@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { setPagePosts, setPageAlbums } from '../../redux/actions';
 
@@ -61,6 +62,18 @@ const Pagination = ({
       </li>
     </ul>
   )
+}
+
+Pagination.propTypes = {
+  pathAlbums: PropTypes.string,
+  pagePosts: PropTypes.number,
+  totalPosts: PropTypes.string,
+  limitPosts: PropTypes.number,
+  totalAlbums: PropTypes.string,
+  limitAlbums: PropTypes.number,
+  pageAlbums: PropTypes.number,
+  setPagePosts: PropTypes.func,
+  setPageAlbums: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

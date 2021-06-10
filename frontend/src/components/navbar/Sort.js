@@ -1,8 +1,15 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setOrderPosts, setOrderAlbums } from '../../redux/actions';
 
-const Sort = ({ pathAlbums, orderPosts, orderAlbums, setOrderPosts, setOrderAlbums }) => {
+const Sort = ({
+  pathAlbums,
+  orderPosts,
+  orderAlbums,
+  setOrderPosts,
+  setOrderAlbums
+}) => {
 
   const handleChange = (e) => {
     window.location.pathname === pathAlbums
@@ -26,6 +33,14 @@ const Sort = ({ pathAlbums, orderPosts, orderAlbums, setOrderPosts, setOrderAlbu
       <option value='desc'>DESC</option>
     </select>
   )
+}
+
+Sort.propTypes = {
+  pathAlbums: PropTypes.string,
+  orderPosts: PropTypes.string,
+  orderAlbums: PropTypes.string,
+  setOrderPosts: PropTypes.func,
+  setOrderAlbums: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

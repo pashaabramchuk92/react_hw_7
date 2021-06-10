@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 const ChangeView = ({ view, setView }) => {
@@ -21,6 +22,11 @@ const ChangeView = ({ view, setView }) => {
       </button>
     </div>
   )
+}
+
+ChangeView.propTypes = {
+  view: PropTypes.string,
+  setView: PropTypes.func
 }
 
 export default React.memo(ChangeView);

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import useDebounce from '../hooks/useDebounce';
@@ -37,6 +38,12 @@ const Posts = ({ posts, params, getData }) => {
   )
 }
 
+Posts.propTypes = {
+  posts: PropTypes.array,
+  params: PropTypes.object,
+  getData: PropTypes.func,
+}
+
 const mapStateToProps = (state) => {
   return {
     posts: state.postsReducer.posts,
@@ -48,7 +55,7 @@ const mapStateToProps = (state) => {
       query: state.postsReducer.query,
       view: state.postsReducer.view,
       total: state.postsReducer.total
-    },
+    }
   }
 }
 

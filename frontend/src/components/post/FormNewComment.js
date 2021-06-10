@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from "react";
 import { connect } from "react-redux";
 
@@ -64,6 +65,12 @@ const FormNewComment = ({ id, path, postComment }) => {
       </fieldset>
     </form>
   )
+}
+
+FormNewComment.propTypes = {
+  id: PropTypes.number,
+  path: PropTypes.string,
+  postComment: PropTypes.func,
 }
 
 export default connect(null, { postComment })(FormNewComment);

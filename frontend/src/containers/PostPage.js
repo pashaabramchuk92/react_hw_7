@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -56,6 +57,16 @@ const PostPage = ({
       </div>
     </div>
   )
+}
+
+PostPage.propTypes = {
+  id: PropTypes.string,
+  post: PropTypes.object,
+  path: PropTypes.string,
+  user: PropTypes.object,
+  pathUsers: PropTypes.string,
+  getPostData: PropTypes.func,
+  getUserData: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

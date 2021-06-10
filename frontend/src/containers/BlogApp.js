@@ -1,14 +1,23 @@
+import PropTypes from 'prop-types';
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from 'history';
+import { connect } from "react-redux";
+import { useEffect } from "react";
+import { getLikePosts, getLikeAlbums } from '../redux/actions';
 
 import Posts from "./Posts";
 import PostPage from './PostPage';
 import Albums from "./Albums";
-import { connect } from "react-redux";
 
 const history = createBrowserHistory();
 
-const BlogApp = ({ postPath, albumsPath }) => {
+const BlogApp = ({ postPath, albumsPath, getLikePosts, getLikeAlbums }) => {
+
+  useEffect(() => {
+    getLikeAlbums(albumsPath);
+    getLikePosts(postPath);
+  }, [albumsPath, postPath, getLikePosts, getLikeAlbums]);
+
   return (
     <Router history={history}>
       <Switch>
@@ -37,4 +46,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(BlogApp);
+BlogApp.propTypes = {
+  postPath: PropTypes.string,
+  albumsPath: PropTypes.string,
+  getLikePosts: PropTypes.func,
+  getLikeAlbums: PropTypes.func
+}
+
+export default connect(mapStateToProps, { getLikePosts, getLikeAlbums })(BlogApp);

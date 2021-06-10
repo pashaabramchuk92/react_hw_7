@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom"
 
@@ -19,6 +20,11 @@ const HeaderTabs = ({ postPath, albumsPath }) => {
       </ul>
     </div>
   )
+}
+
+HeaderTabs.propTypes = {
+  postPath: PropTypes.string,
+  albumsPath: PropTypes.string,
 }
 
 const mapStateToProps = (state) => {

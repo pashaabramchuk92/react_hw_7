@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import AlbumsGridItem from "./AlbumsGridItem";
 
 const AlbumsGrid = ({ albums }) => {
@@ -10,6 +11,10 @@ const AlbumsGrid = ({ albums }) => {
       }
     </div>
   )
+}
+
+AlbumsGrid.propTypes = {
+  albums: PropTypes.array,
 }
 
 export default AlbumsGrid;

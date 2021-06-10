@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import PostsListItem from "./PostsListItem"
 
 const PostsList = ({ posts }) => {
@@ -10,6 +12,10 @@ const PostsList = ({ posts }) => {
       }
     </div>
   )
+}
+
+PostsList.propTypes = {
+  posts: PropTypes.array
 }
 
 export default PostsList;

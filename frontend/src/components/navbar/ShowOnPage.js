@@ -1,8 +1,15 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setLimitPosts, setLimitAlbums } from '../../redux/actions'; 
 
-const ShowOnPage = ({ pathAlbums, limitPosts, limitAlbums, setLimitPosts, setLimitAlbums }) => {
+const ShowOnPage = ({
+  pathAlbums,
+  limitPosts,
+  limitAlbums,
+  setLimitPosts,
+  setLimitAlbums
+}) => {
 
   const handleChange = (e) => {
     window.location.pathname === pathAlbums
@@ -23,6 +30,14 @@ const ShowOnPage = ({ pathAlbums, limitPosts, limitAlbums, setLimitPosts, setLim
       <option value="24">24</option>
     </select>
   )
+}
+
+ShowOnPage.propTypes = {
+  pathAlbums: PropTypes.string,
+  limitPosts: PropTypes.number,
+  limitAlbums: PropTypes.number,
+  setLimitPosts: PropTypes.func,
+  setLimitAlbums: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

@@ -4207,7 +4207,7 @@
     {
       "userId": 1,
       "id": 1,
-      "like": false,
+      "like": true,
       "title": "quidem molestiae enim"
     },
     {
@@ -4219,7 +4219,7 @@
     {
       "userId": 1,
       "id": 3,
-      "like": true,
+      "like": false,
       "title": "omnis laborum odio"
     },
     {

@@ -18,9 +18,10 @@ import {
   GET_POST_DATA,
   GET_USER,
   POST_COMMENT,
-  GET_LIKE_DATA,
   SET_LIKE_POST,
-  SET_LIKE_ALBUM
+  SET_LIKE_ALBUM,
+  GET_LIKE_POSTS,
+  GET_LIKE_ALBUMS
 } from './actionsType';
 
 export const getData = (path, page, limit, order, query) => {
@@ -86,11 +87,22 @@ export const postComment = (path, id, commentData) => {
   }
 };
 
-export const getLikeData = (path) => {
+export const getLikePosts = (path) => {
   return async (dispatch) => {
     try {
       const { data } = await api.get(`${path}?like_like=true`);
-      dispatch({type: GET_LIKE_DATA, payload: data})
+      dispatch({type: GET_LIKE_POSTS, payload: data})
+    } catch (error) {
+      console.log(`Something went wrong... ${error}`);
+    }
+  }
+}
+
+export const getLikeAlbums = (path) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await api.get(`${path}?like_like=true`);
+      dispatch({type: GET_LIKE_ALBUMS, payload: data})
     } catch (error) {
       console.log(`Something went wrong... ${error}`);
     }
@@ -128,13 +140,9 @@ export const setView = (view) => ({
   payload: view
 });
 
+// posts
 export const setNextPosts = (next) => ({
   type: SET_NEXT_POSTS,
-  payload: next,
-});
-
-export const setNextAlbums = (next) => ({
-  type: SET_NEXT_ALBUMS,
   payload: next,
 });
 
@@ -156,6 +164,12 @@ export const setQueryPosts = (query) => ({
 export const setPagePosts = (page) => ({
   type: SET_PAGE_POSTS,
   payload: page
+});
+
+// albums
+export const setNextAlbums = (next) => ({
+  type: SET_NEXT_ALBUMS,
+  payload: next,
 });
 
 export const setLimitAlbums = (limit) => ({

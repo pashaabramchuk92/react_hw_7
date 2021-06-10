@@ -1,15 +1,21 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+
 import LikeBtn from '../generic/LikeBtn';
 
-const PostsGridItem = ({ post }) => {
+const PostsGridItem = ({ post, likedPosts }) => {
   return (
     <div>
     <div className="uk-card uk-card-default uk-margin-medium-bottom">
       <div className="uk-card-header">
         <h3 className="uk-card-title uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
           {`${post.title.slice(0, 10)}...`}
-          <LikeBtn postId={post.id} />
+          <LikeBtn
+            postId={post.id}
+            isLikePost={likedPosts.find(x => x.id === post.id)}
+          />
         </h3>
       </div>
       <div className="uk-card-body  uk-text-break">
@@ -26,4 +32,15 @@ const PostsGridItem = ({ post }) => {
   )
 }
 
-export default React.memo(PostsGridItem);
+PostsGridItem.propTypes = {
+  post: PropTypes.object,
+  likedPosts: PropTypes.array
+}
+
+const mapStateToProps = (state) => {
+  return {
+    likedPosts: state.postsReducer.likedPosts,
+  }
+}
+
+export default connect(mapStateToProps)(React.memo(PostsGridItem));

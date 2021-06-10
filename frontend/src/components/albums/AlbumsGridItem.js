@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+
 import LikeBtn from '../generic/LikeBtn';
 
-const AlbumsGridItem = ({ album }) => {
-
+const AlbumsGridItem = ({ album, likedAlbums }) => {
   return (
     <div>
       <div className="uk-card uk-card-default uk-margin-medium-bottom uk-light">
@@ -18,16 +20,25 @@ const AlbumsGridItem = ({ album }) => {
             <p>{album.title}</p>
         </div>
         <div className="uk-position-top-right uk-overlay">
-          <LikeBtn albumId={album.id} />
-          {/* <LikeBtn
-            id={album.id}
-            isLiked={likedAlbums.find(x => x.id === album.id)}
-            like={album.like}
-          /> */}
+          <LikeBtn
+            albumId={album.id}
+            isLikeAlbum={likedAlbums.find(x => x.id === album.id)}
+          />
         </div>
       </div>
     </div>
   )
 }
 
-export default React.memo(AlbumsGridItem);
+AlbumsGridItem.propTypes = {
+  album: PropTypes.object,
+  likedAlbums: PropTypes.array,
+}
+
+const mapStateToProps = (state) => {
+  return {
+    likedAlbums: state.albumsReducer.likedAlbums,
+  }
+}
+
+export default connect(mapStateToProps)(React.memo(AlbumsGridItem));

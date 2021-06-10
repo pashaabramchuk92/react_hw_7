@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Comment = ({ comment }) => {
   return (
     <div className="uk-comments">
@@ -23,6 +25,10 @@ const Comment = ({ comment }) => {
         <hr />
     </div>
   )
+}
+
+Comment.propTypes = {
+  comment: PropTypes.object
 }
 
 export default Comment;

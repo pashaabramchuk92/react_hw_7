@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setQueryPosts, setQueryAlbums } from '../../redux/actions';
@@ -43,6 +44,16 @@ const SearchBar = ({
       />
     </form>
   )
+}
+
+SearchBar.propTypes = {
+  pathAlbums: PropTypes.string,
+  isSearching: PropTypes.bool,
+  searchValuePosts: PropTypes.string,
+  searchValueAlbums: PropTypes.string,
+  setIsSearching: PropTypes.func,
+  setQueryPosts: PropTypes.func,
+  setQueryAlbums: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

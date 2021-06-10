@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import PostsGridItem from "./PostsGridItem";
 
 const PostsGrid = ({ posts }) => {
@@ -10,6 +12,10 @@ const PostsGrid = ({ posts }) => {
       }
     </div>
   )
+}
+
+PostsGrid.propTypes = {
+  posts: PropTypes.array
 }
 
 export default PostsGrid;

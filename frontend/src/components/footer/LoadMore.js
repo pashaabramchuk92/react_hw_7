@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { setNextPosts, setNextAlbums, getMoreData } from '../../redux/actions';
@@ -38,6 +39,14 @@ const LoadMore = ({ setNextPosts, setNextAlbums, getMoreData, config }) => {
     </div>
   )
 }
+
+LoadMore.propTypes = {
+  setNextPosts: PropTypes.func,
+  setNextAlbums: PropTypes.func,
+  getMoreData: PropTypes.func,
+  config: PropTypes.object
+}
+
 
 const mapStateToProps = (state) => {
   return {
