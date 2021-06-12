@@ -21,6 +21,8 @@ const AlbumsGrid = ({ albums, likedAlbums, likeHandler }) => {
 
 AlbumsGrid.propTypes = {
   albums: PropTypes.array,
+  likedAlbums: PropTypes.array,
+  likeHandler: PropTypes.func
 }
 
 export default AlbumsGrid;

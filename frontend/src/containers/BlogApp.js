@@ -24,15 +24,15 @@ const BlogApp = ({ postPath, albumsPath, getLikePosts, getLikeAlbums }) => {
         <Route
           path='/'
           exact
-          render={() => <Posts/>}
+          component={Posts}
         />
         <Route
           path={`${postPath}/:id`}
-          render={() => <PostPage/>}
+          component={PostPage}
         />
         <Route
           path={albumsPath}
-          render={() => <Albums/>}
+          component={Albums}
         />
       </Switch>
     </Router>
@@ -43,6 +43,8 @@ const mapStateToProps = (state) => {
   return {
     postPath: state.postsReducer.path,
     albumsPath: state.albumsReducer.path,
+    getLikePosts: PropTypes.func,
+    getLikeAlbums: PropTypes.func
   }
 }
 

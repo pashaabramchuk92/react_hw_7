@@ -82,9 +82,13 @@ const HeaderLiked = ({
 }
 
 HeaderLiked.propTypes = {
+  pathPosts: PropTypes.string,
+  pathAlbums: PropTypes.string,
   likedPosts: PropTypes.array,
   likedAlbums: PropTypes.array,
-  dislikeHandler: PropTypes.func
+  dislikeHandler: PropTypes.func,
+  getLikePosts: PropTypes.func,
+  getLikeAlbums: PropTypes.func
 }
 
 export default React.memo(HeaderLiked);

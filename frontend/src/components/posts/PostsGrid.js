@@ -21,7 +21,9 @@ const PostsGrid = ({ posts, likedPosts, likeHandler }) => {
 }
 
 PostsGrid.propTypes = {
-  posts: PropTypes.array
+  posts: PropTypes.array,
+  likedPosts: PropTypes.array,
+  likeHandler: PropTypes.func
 }
 
 export default PostsGrid;

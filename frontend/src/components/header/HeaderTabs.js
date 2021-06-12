@@ -20,6 +20,8 @@ const HeaderTabs = ({ activeClassPostsTab, activeClassAlbumsTab, resetPosts, res
 HeaderTabs.propTypes = {
   activeClassPostsTab: PropTypes.string,
   activeClassAlbumsTab: PropTypes.string,
+  resetPosts: PropTypes.func,
+  resetAlbums: PropTypes.func
 }
 
 export default HeaderTabs;

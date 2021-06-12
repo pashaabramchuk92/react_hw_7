@@ -70,7 +70,9 @@ PostPage.propTypes = {
   user: PropTypes.object,
   pathUsers: PropTypes.string,
   getPostData: PropTypes.func,
-  getUserData: PropTypes.func
+  getUserData: PropTypes.func,
+  postComment: PropTypes.func,
+  setLikePost: PropTypes.func,
 }
 
 const mapStateToProps = (state) => {

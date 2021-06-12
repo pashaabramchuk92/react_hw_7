@@ -21,7 +21,9 @@ const PostsList = ({ posts, likedPosts, likeHandler }) => {
 }
 
 PostsList.propTypes = {
-  posts: PropTypes.array
+  posts: PropTypes.array,
+  likedPosts: PropTypes.array,
+  likeHandler: PropTypes.func
 }
 
 export default PostsList;

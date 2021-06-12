@@ -59,16 +59,18 @@ const Header = ({
   )
 }
 
-// Header.propTypes = {
-//   pathAlbums: PropTypes.string,
-//   pathPosts: PropTypes.string,
-//   likedPosts: PropTypes.array,
-//   likedAlbums: PropTypes.array,
-//   setLikePost: PropTypes.func,
-//   setLikeAlbum: PropTypes.func,
-//   getLikePosts: PropTypes.func,
-//   getLikeAlbums: PropTypes.func,
-// }
+Header.propTypes = {
+  path: PropTypes.string,
+  pathPosts: PropTypes.string,
+  pathAlbums: PropTypes.string,
+  likedPosts: PropTypes.array,
+  likedAlbums: PropTypes.array,
+  dislikeHandler: PropTypes.func,
+  getLikePosts: PropTypes.func,
+  getLikeAlbums: PropTypes.func,
+  resetPosts: PropTypes.func,
+  resetAlbums: PropTypes.func
+}
 
 const mapStateToProps = (state) => {
   return {

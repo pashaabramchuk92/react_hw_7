@@ -34,6 +34,7 @@ const AlbumsGridItem = ({ album, likedAlbums, likeHandler }) => {
 AlbumsGridItem.propTypes = {
   album: PropTypes.object,
   likedAlbums: PropTypes.array,
+  likeHandler: PropTypes.func
 }
 
 export default React.memo(AlbumsGridItem);

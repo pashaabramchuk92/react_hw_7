@@ -102,21 +102,25 @@ const Albums = ({ params, functions }) => {
   )
 }
 
-// Albums.propTypes = {
-//   albums: PropTypes.array,
-//   likedAlbums: PropTypes.array,
-//   page: PropTypes.number,
-//   limit: PropTypes.number,
-//   order: PropTypes.string,
-//   path: PropTypes.string,
-//   query: PropTypes.string,
-//   getData: PropTypes.func,
-//   getLikeAlbums: PropTypes.func,
-//   setLikeAlbum: PropTypes.func,
-//   setOrder: PropTypes.func,
-//   setLimit: PropTypes.func,
-//   setQuery: PropTypes.func
-// }
+Albums.propTypes = {
+  params: PropTypes.shape({
+    albums: PropTypes.array,
+    likedAlbums: PropTypes.array,
+    page: PropTypes.number,
+    limit: PropTypes.number,
+    order: PropTypes.string,
+    path: PropTypes.string,
+    query: PropTypes.string,
+  }),
+  functions: PropTypes.shape({
+    getData: PropTypes.func,
+    getLikeAlbums: PropTypes.func,
+    setLikeAlbum: PropTypes.func,
+    setOrder: PropTypes.func,
+    setLimit: PropTypes.func,
+    setQuery: PropTypes.func
+  })
+}
 
 const mapStateToProps = (state) => {
   return {

@@ -47,7 +47,7 @@ Footer.propTypes = {
   handleLoadMore: PropTypes.func,
   handleClickNext: PropTypes.func,
   handleClickPrev: PropTypes.func,
-  handleClickPage: PropTypes.func,
+  handleClickPage: PropTypes.func
 }
 
 export default Footer;

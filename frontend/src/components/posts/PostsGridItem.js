@@ -34,7 +34,8 @@ const PostsGridItem = ({ post, likedPosts, likeHandler }) => {
 
 PostsGridItem.propTypes = {
   post: PropTypes.object,
-  likedPosts: PropTypes.array
+  likedPosts: PropTypes.array,
+  likeHandler: PropTypes.func
 }
 
 export default React.memo(PostsGridItem);

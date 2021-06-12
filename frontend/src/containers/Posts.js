@@ -66,8 +66,6 @@ const Posts = ({ params, functions }) => {
 
   const handleClickPage = (currentPage) => functions.setPage(currentPage);
 
-  console.log(params.page, params.limit, params.order, params.view);
-
   return (
     <div className="App">
       <div className="uk-main">
@@ -117,23 +115,27 @@ const Posts = ({ params, functions }) => {
   )
 }
 
-// Posts.propTypes = {
-//   posts: PropTypes.array,
-//   likedPosts: PropTypes.array,
-//   page: PropTypes.number,
-//   limit: PropTypes.number,
-//   path: PropTypes.string,
-//   order: PropTypes.string,
-//   query: PropTypes.string,
-//   view: PropTypes.string,
-//   getData: PropTypes.func,
-//   getLikePosts: PropTypes.func,
-//   setLikePost: PropTypes.func,
-//   setView: PropTypes.func,
-//   setOrder: PropTypes.func,
-//   setLimit: PropTypes.func,
-//   setQuery: PropTypes.func
-// }
+Posts.propTypes = {
+  params: PropTypes.shape({
+    posts: PropTypes.array,
+    likedPosts: PropTypes.array,
+    page: PropTypes.number,
+    limit: PropTypes.number,
+    path: PropTypes.string,
+    order: PropTypes.string,
+    query: PropTypes.string,
+    view: PropTypes.string,
+  }),
+  functions: PropTypes.shape({
+    getData: PropTypes.func,
+    getLikePosts: PropTypes.func,
+    setLikePost: PropTypes.func,
+    setView: PropTypes.func,
+    setOrder: PropTypes.func,
+    setLimit: PropTypes.func,
+    setQuery: PropTypes.func
+  })
+}
 
 const mapStateToProps = (state) => {
   return {
