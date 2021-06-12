@@ -1,33 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
-import { setOrderPosts, setOrderAlbums } from '../../redux/actions';
 
-const Sort = ({
-  pathAlbums,
-  orderPosts,
-  orderAlbums,
-  setOrderPosts,
-  setOrderAlbums
-}) => {
-
-  const handleChange = (e) => {
-    window.location.pathname === pathAlbums
-    ? setOrderAlbums(e.target.value)
-    : setOrderPosts(e.target.value)
-  }
-
-  const selectedOrder = 
-    window.location.pathname === pathAlbums
-    ? orderAlbums
-    : orderPosts;
+const Sort = ({ handleChangeOrder, selectedOrder }) => {
 
   return (
     <select
       className="uk-select uk-width-small uk-margin-auto-left"
       name="selected"
       value={selectedOrder}
-      onChange={(e) => handleChange(e)}
+      onChange={(e) => handleChangeOrder(e)}
     >
       <option value="asc">ASC</option>
       <option value='desc'>DESC</option>
@@ -36,19 +17,8 @@ const Sort = ({
 }
 
 Sort.propTypes = {
-  pathAlbums: PropTypes.string,
-  orderPosts: PropTypes.string,
-  orderAlbums: PropTypes.string,
-  setOrderPosts: PropTypes.func,
-  setOrderAlbums: PropTypes.func
+  selectedOrder: PropTypes.string,
+  handleChange: PropTypes.func
 }
 
-const mapStateToProps = (state) => {
-  return {
-      pathAlbums: state.albumsReducer.path,
-      orderPosts: state.postsReducer.order,
-      orderAlbums: state.albumsReducer.order
-    }
-}
-
-export default connect(mapStateToProps, { setOrderPosts, setOrderAlbums })(React.memo(Sort));
+export default React.memo(Sort);

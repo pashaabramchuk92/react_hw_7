@@ -1,34 +1,14 @@
-import PropTypes from 'prop-types';
-import { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { setNextPosts, setNextAlbums, getMoreData } from '../../redux/actions';
+import PropTypes from 'prop-types'; 
 
-const LoadMore = ({ setNextPosts, setNextAlbums, getMoreData, config }) => {
-  
-  const checkLocation = window.location.pathname === config.pathAlbums;
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    checkLocation
-    ? getMoreData(config.pathAlbums, config.nextAlbums, config.orderAlbums)
-    : getMoreData(config.pathPosts, config.nextPosts, config.orderPosts)
-
-    setIsLoading(false)
-  }, [checkLocation, getMoreData, config.pathAlbums, config.nextAlbums,
-    config.orderAlbums, config.pathPosts, config.nextPosts, config.orderPosts]);
-
-  const handleClick = () => (
-    checkLocation
-    ? setNextAlbums(config.nextAlbums + config.limitAlbums)
-    : setNextPosts(config.nextPosts + config.limitPosts));
-  
-
+const LoadMore = ({ isLoading, setIsLoading, handleLoadMore }) => {
   return (
     <div className="uk-margin">
       <button
         className="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
-        onClick={() => {handleClick(); setIsLoading(true);}}
+        onClick={() => {
+          handleLoadMore();
+          setIsLoading(true);
+        }}
       >Load more
         <div
           className="uk-margin-small-left"
@@ -41,27 +21,9 @@ const LoadMore = ({ setNextPosts, setNextAlbums, getMoreData, config }) => {
 }
 
 LoadMore.propTypes = {
-  setNextPosts: PropTypes.func,
-  setNextAlbums: PropTypes.func,
-  getMoreData: PropTypes.func,
-  config: PropTypes.object
+  isLoading: PropTypes.bool,
+  setIsLoading: PropTypes.func,
+  handleLoadMore: PropTypes.func
 }
 
-
-const mapStateToProps = (state) => {
-  return {
-    config: {
-      pathPosts: state.postsReducer.path,
-      nextPosts: state.postsReducer.next + state.postsReducer.limit,
-      limitPosts: state.postsReducer.limit,
-      orderPosts: state.postsReducer.order,
-
-      pathAlbums: state.albumsReducer.path,
-      nextAlbums: state.albumsReducer.next + state.albumsReducer.limit,
-      limitAlbums: state.albumsReducer.limit,
-      orderAlbums: state.albumsReducer.order,
-    }
-  }
-}
-
-export default connect(mapStateToProps, { setNextPosts, setNextAlbums, getMoreData })(LoadMore);
+export default LoadMore;

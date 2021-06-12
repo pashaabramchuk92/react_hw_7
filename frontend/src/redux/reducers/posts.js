@@ -1,3 +1,4 @@
+import { viewType } from "../../utils/enums";
 import {
   GET_DATA,
   SET_VIEW,
@@ -9,6 +10,7 @@ import {
   SET_PAGE_POSTS,
   SET_LIKE_POST,
   GET_LIKE_POSTS,
+  RESET_FILTERS_POSTS
 } from "../actions/actionsType";
 
 const initialState = {
@@ -18,7 +20,7 @@ const initialState = {
   limit: 6,
   order: 'asc',
   query: '',
-  view: 'grid',
+  view: viewType.GRID,
   next: 6,
   total: null,
   likedPosts: [],
@@ -38,15 +40,24 @@ const postsReducer = (state = initialState, { type, payload }) => {
     case SET_QUERY_POSTS:
       return {...state, query: payload};
     case SET_VIEW:
-      return {...state, view: payload}
+      return {...state, view: payload};
     case SET_NEXT_POSTS:
-      return {...state, next: payload}
+      return {...state, next: payload};
     case GET_MORE_DATA:
-      return {...state, posts: payload}
+      return {...state, posts: payload};
     case GET_LIKE_POSTS:
-      return {...state, likedPosts: payload}
+      return {...state, likedPosts: payload};
     case SET_LIKE_POST:
-      return {...state, like: payload}
+      return {...state, like: payload};
+    case RESET_FILTERS_POSTS:
+      return {
+        ...state,
+        page: initialState.page,
+        limit: initialState.limit,
+        order: initialState.order,
+        view: initialState.view,
+        next: initialState.next
+      };
     default:
       return state;
   }

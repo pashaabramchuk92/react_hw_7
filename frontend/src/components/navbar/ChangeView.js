@@ -1,22 +1,25 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { viewType } from '../../utils/enums';
 
 const ChangeView = ({ view, setView }) => {
 
-  const activeClassGrid = view ? 'uk-active' : '';
-  const activeClassList = view ? '' : 'uk-active';
+  const activeClassGrid = view === viewType.GRID ? 'uk-active' : '';
+  const activeClassList = view === viewType.LIST? 'uk-active' : '';  
 
   return (
     <div className="uk-button-group uk-margin-left">
       <button
         className={"uk-button uk-button-default" + activeClassGrid}
-        onClick={() => setView('grid')}
+        name='grid'
+        onClick={(e) => setView(viewType.GRID)}
       >
         <span uk-icon="icon:  grid"></span>
       </button>
       <button
         className={"uk-button uk-button-default" + activeClassList}
-        onClick={() => setView('')}
+        name='list'
+        onClick={(e) => setView(viewType.LIST)}
       >
         <span uk-icon="icon:  list"></span>
       </button>

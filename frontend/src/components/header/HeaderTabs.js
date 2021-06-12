@@ -1,21 +1,16 @@
 import PropTypes from 'prop-types';
-import { connect } from "react-redux";
 import { Link } from "react-router-dom"
 
-const HeaderTabs = ({ postPath, albumsPath }) => {
+const HeaderTabs = ({ activeClassPostsTab, activeClassAlbumsTab, resetPosts, resetAlbums }) => {
+
   return (
     <div className="uk-navbar-left">
       <ul className="uk-navbar-nav">
-        <li
-          className={
-            window.location.pathname === '/' || window.location.pathname.includes(postPath)
-            ? 'uk-active'
-            : ''}
-        >
-          <Link to='/'>Posts</Link>
+        <li className={activeClassPostsTab}>
+          <Link to='/' onClick={resetPosts}>Posts</Link>
         </li>
-        <li className={window.location.pathname === albumsPath ? 'uk-active' : ''}>
-          <Link to='/albums'>Albums</Link>
+        <li className={activeClassAlbumsTab}>
+          <Link to='/albums' onClick={resetAlbums}>Albums</Link>
         </li>
       </ul>
     </div>
@@ -23,15 +18,8 @@ const HeaderTabs = ({ postPath, albumsPath }) => {
 }
 
 HeaderTabs.propTypes = {
-  postPath: PropTypes.string,
-  albumsPath: PropTypes.string,
+  activeClassPostsTab: PropTypes.string,
+  activeClassAlbumsTab: PropTypes.string,
 }
 
-const mapStateToProps = (state) => {
-  return {
-    postPath: state.postsReducer.path,
-    albumsPath: state.albumsReducer.path,
-  }
-}
-
-export default connect(mapStateToProps)(HeaderTabs);
+export default HeaderTabs;

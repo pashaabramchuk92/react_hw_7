@@ -21,13 +21,15 @@ import {
   SET_LIKE_POST,
   SET_LIKE_ALBUM,
   GET_LIKE_POSTS,
-  GET_LIKE_ALBUMS
+  GET_LIKE_ALBUMS,
+  RESET_FILTERS_POSTS,
+  RESET_FILTERS_ALBUMS
 } from './actionsType';
 
 export const getData = (path, page, limit, order, query) => {
   return async (dispatch) => {
     try {
-      const { data, headers } = await api.get(`${path}?_page=${page}&_limit=${limit}&_sort=id&_order=${order}&title_like=${query}`);
+      const { data, headers } = await api.get(`${path}?_page=${page}&_limit=${limit}&_sort=title&_order=${order}&title_like=${query}`);
       dispatch({
         type: GET_DATA,
         payload: {
@@ -44,7 +46,7 @@ export const getData = (path, page, limit, order, query) => {
 export const getMoreData = (path, end, order) => {
   return async (dispatch) => {
     try {
-      const { data } = await api.get(`${path}?_start=0&_end=${end}&_sort=id&_order=${order}`);
+      const { data } = await api.get(`${path}?_start=0&_end=${end}&_sort=title&_order=${order}`);
       dispatch({ type: GET_MORE_DATA, payload: data });
     } catch (error) {
       console.log(`Something went wrong... ${error}`);
@@ -135,6 +137,14 @@ export const setLikeAlbum = (path, id, like) => {
   }
 }
 
+export const resetPosts = () => ({
+  type: RESET_FILTERS_POSTS
+});
+
+export const resetAlbums = () => ({
+  type: RESET_FILTERS_ALBUMS
+});
+
 export const setView = (view) => ({
   type: SET_VIEW,
   payload: view
@@ -148,7 +158,7 @@ export const setNextPosts = (next) => ({
 
 export const setLimitPosts = (limit) => ({
   type: SET_LIMIT_POSTS,
-  payload: limit,
+  payload: Number(limit),
 });
 
 export const setOrderPosts = (order) => ({
@@ -174,7 +184,7 @@ export const setNextAlbums = (next) => ({
 
 export const setLimitAlbums = (limit) => ({
   type: SET_LIMIT_ALBUMS,
-  payload: limit,
+  payload: Number(limit),
 });
 
 export const setOrderAlbums = (order) => ({

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getPostData, getUserData } from '../redux/actions';
+import { getPostData, getUserData, postComment, setLikePost } from '../redux/actions';
 
 import Header from '../components/header/Header';
 import Comment from "../components/post/Comment";
@@ -17,7 +17,9 @@ const PostPage = ({
   user,
   pathUsers,
   getPostData,
-  getUserData
+  getUserData,
+  postComment,
+  setLikePost
 }) => {
 
   useEffect(() => {
@@ -28,10 +30,12 @@ const PostPage = ({
     getUserData(pathUsers, post.userId)
   }, [getUserData, pathUsers, post.userId]);
 
+  const dislikeHandler = (...args) => setLikePost(...args);
+
   return (
     <div className="App">
       <div className="uk-main">
-        <Header />
+        <Header path={path} dislikeHandler={dislikeHandler} />
         <div className="uk-section">
           <div className="uk-container">
             <Link
@@ -51,7 +55,7 @@ const PostPage = ({
             <hr />
             <h3 className="uk-margin-remove-top">Comments:</h3>
             {post?.comments?.map(comment => <Comment key={comment.id} comment={comment} /> )}
-            <FormNewComment id={post.id} path={path} />
+            <FormNewComment id={post.id} path={path} postComment={postComment} />
           </div>
         </div>
       </div>
@@ -78,4 +82,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getPostData, getUserData })(PostPage);
+export default connect(mapStateToProps, { getPostData, getUserData, postComment, setLikePost })(PostPage);

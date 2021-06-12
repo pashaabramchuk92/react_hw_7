@@ -1,8 +1,5 @@
 import PropTypes from 'prop-types';
 import { useState } from "react";
-import { connect } from "react-redux";
-
-import { postComment } from '../../redux/actions';
 
 const FormNewComment = ({ id, path, postComment }) => {
 
@@ -73,4 +70,4 @@ FormNewComment.propTypes = {
   postComment: PropTypes.func,
 }
 
-export default connect(null, { postComment })(FormNewComment);
+export default FormNewComment;

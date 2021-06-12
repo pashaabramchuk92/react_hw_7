@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from "react-redux";
-import { getLikePosts, getLikeAlbums, setLikePost, setLikeAlbum } from '../../redux/actions';
 
 const HeaderLiked = ({
   pathPosts,
   pathAlbums,
   likedPosts,
   likedAlbums,
-  setLikePost,
-  setLikeAlbum,
+  dislikeHandler,
   getLikePosts,
   getLikeAlbums
 }) => {
@@ -27,7 +24,7 @@ const HeaderLiked = ({
           <th style={{color: '#333', fontWeight: '600'}}>Posts</th>
         </tr>}
         {
-          likedPosts.map(post => (
+          likedPosts?.map(post => (
             <tr key={post.id}>
               <td>
                 {
@@ -42,7 +39,7 @@ const HeaderLiked = ({
                   type="button"
                   uk-icon="icon: close;"
                   onClick={() => {
-                    setLikePost(pathPosts, post.id, false);
+                    dislikeHandler(pathPosts, post.id, false);
                     getLikePosts(pathPosts);
                   }}
                 ></button>
@@ -56,7 +53,7 @@ const HeaderLiked = ({
           <th style={{color: '#333', fontWeight: '600'}}>Albums</th>
         </tr>}
         {
-          likedAlbums.map(album => (
+          likedAlbums?.map(album => (
             <tr key={album.id}>
               <td>
                 {
@@ -71,7 +68,7 @@ const HeaderLiked = ({
                   type="button"
                   uk-icon="icon: close;"
                   onClick={() => {
-                    setLikeAlbum(pathAlbums, album.id, false);
+                    dislikeHandler(pathAlbums, album.id, false);
                     getLikeAlbums(pathAlbums);
                   }}
                 ></button>
@@ -85,26 +82,9 @@ const HeaderLiked = ({
 }
 
 HeaderLiked.propTypes = {
-  pathPosts: PropTypes.string,
-  pathAlbums: PropTypes.string,
   likedPosts: PropTypes.array,
   likedAlbums: PropTypes.array,
-  setLikePost: PropTypes.func,
-  setLikeAlbum: PropTypes.func,
-  getLikePosts: PropTypes.func,
-  getLikeAlbums: PropTypes.func
+  dislikeHandler: PropTypes.func
 }
 
-const mapStateToProps = (state) => {
-  return {
-    pathAlbums: state.albumsReducer.path,
-    pathPosts: state.postsReducer.path,
-
-    likedPosts: state.postsReducer.likedPosts,
-    likedAlbums: state.albumsReducer.likedAlbums,
-  }
-}
-
-export default React.memo(
-  connect(mapStateToProps, { getLikePosts, getLikeAlbums, setLikePost, setLikeAlbum })(HeaderLiked)
-);
+export default React.memo(HeaderLiked);

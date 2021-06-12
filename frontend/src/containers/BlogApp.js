@@ -2,21 +2,21 @@ import PropTypes from 'prop-types';
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 import { connect } from "react-redux";
-import { useEffect } from "react";
 import { getLikePosts, getLikeAlbums } from '../redux/actions';
 
 import Posts from "./Posts";
 import PostPage from './PostPage';
 import Albums from "./Albums";
+import { useEffect } from 'react';
 
 const history = createBrowserHistory();
 
 const BlogApp = ({ postPath, albumsPath, getLikePosts, getLikeAlbums }) => {
 
   useEffect(() => {
-    getLikeAlbums(albumsPath);
     getLikePosts(postPath);
-  }, [albumsPath, postPath, getLikePosts, getLikeAlbums]);
+    getLikeAlbums(albumsPath);
+  }, [postPath, albumsPath, getLikePosts, getLikeAlbums]);
 
   return (
     <Router history={history}>
@@ -24,15 +24,15 @@ const BlogApp = ({ postPath, albumsPath, getLikePosts, getLikeAlbums }) => {
         <Route
           path='/'
           exact
-          component={Posts}
+          render={() => <Posts/>}
         />
         <Route
           path={`${postPath}/:id`}
-          component={PostPage}
+          render={() => <PostPage/>}
         />
         <Route
           path={albumsPath}
-          component={Albums}
+          render={() => <Albums/>}
         />
       </Switch>
     </Router>
@@ -48,9 +48,7 @@ const mapStateToProps = (state) => {
 
 BlogApp.propTypes = {
   postPath: PropTypes.string,
-  albumsPath: PropTypes.string,
-  getLikePosts: PropTypes.func,
-  getLikeAlbums: PropTypes.func
+  albumsPath: PropTypes.string
 }
 
 export default connect(mapStateToProps, { getLikePosts, getLikeAlbums })(BlogApp);
